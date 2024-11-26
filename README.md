@@ -77,3 +77,62 @@ DSP2833x_Libraries
 ③芯片内核及外设.c源文件，比如DSP2833x_Gpio.c、DSP2833x_PieCtrl.c等。
 ④芯片内核及外设.h头文件，比如DSP2833x_Gpio.h、DSP2833x_PieCtrl.h等。
 ⑤DSP .lib库文件，常用的如IQmath.lib等。
+
+## 七、时钟及其控制系统
+
+### 7.1 外部时钟接入方式
+
+![alt text](images/7.1.1.png)
+外部时钟源信号接入方法有2种，分别针对的是电压为3.3V的外部时钟和1.9V的外部时钟。
+（1）外部时钟信号接入方式1，即采用3.3V的外部时钟。
+![alt text](images/7.1.2.png)
+（2）外部时钟信号接入方式2，即采用1.9V的外部时钟。
+![alt text](images/7.1.3.png)
+
+### 7.2 时钟结构
+
+![alt text](images/7.2.1.png)
+下图为常用寄存器
+![alt text](images/7.2.2.png)
+![alt text](images/7.2.3.png)
+
+```C
+//#define DSP28_DIVSEL   0   // Enable /4 for SYSCLKOUT
+#define DSP28_DIVSEL   1 // Disable /4 for SYSCKOUT
+//#define DSP28_DIVSEL     2 // Enable /2 for SYSCLKOUT
+//#define DSP28_DIVSEL     3 // Enable /1 for SYSCLKOUT
+
+//#define DSP28_PLLCR   10
+//#define DSP28_PLLCR    9
+//#define DSP28_PLLCR    8
+//#define DSP28_PLLCR    7
+//#define DSP28_PLLCR    6
+//#define DSP28_PLLCR    5
+//#define DSP28_PLLCR    4
+#define DSP28_PLLCR    3
+//#define DSP28_PLLCR    2
+//#define DSP28_PLLCR    1
+//#define DSP28_PLLCR    0  // PLL is bypassed in this mode
+```
+
+上面所展示的代码为官方提供的文件中，对其进行模块化处理的代码
+
+## 八、点亮第一个LED灯
+
+## 8.1 管脚分类
+
+![alt text](images/8.1.1.png)
+此芯片共有 176 引脚，类型如下：
+（1）电源引脚
+（2）晶振引脚
+（3）复位引脚
+（4）下载引脚
+（5）BOOT引脚
+（6）GPIO 引脚
+
+## 8.2 GPIO结构框图
+
+![alt text](images/8.2.1.png)
+滤波+采样来实现去除毛刺信号
+![alt text](images/8.2.2.png)
+![alt text](images/8.2.3.png)
