@@ -1,39 +1,11 @@
 
-**** Clean-only build of configuration Debug for project example01_systemclock_config ****
-
-"C:\\ti\\ccsv6\\utils\\bin\\gmake" -k clean 
-DEL /F  "DSP8233x_Project.out"  "DSP8233x_Project.hex" 
-DEL /F "DSP2833x_Libraries\DSP2833x_DefaultIsr.d" "DSP2833x_Libraries\DSP2833x_GlobalVariableDefs.d" "DSP2833x_Libraries\DSP2833x_Gpio.d" "DSP2833x_Libraries\DSP2833x_PieCtrl.d" "DSP2833x_Libraries\DSP2833x_PieVect.d" "DSP2833x_Libraries\DSP2833x_SysCtrl.d" "User\main.d" 
-DEL /F "DSP2833x_Libraries\DSP2833x_ADC_cal.obj" "DSP2833x_Libraries\DSP2833x_CodeStartBranch.obj" "DSP2833x_Libraries\DSP2833x_DefaultIsr.obj" "DSP2833x_Libraries\DSP2833x_GlobalVariableDefs.obj" "DSP2833x_Libraries\DSP2833x_Gpio.obj" "DSP2833x_Libraries\DSP2833x_PieCtrl.obj" "DSP2833x_Libraries\DSP2833x_PieVect.obj" "DSP2833x_Libraries\DSP2833x_SysCtrl.obj" "DSP2833x_Libraries\DSP2833x_usDelay.obj" "User\main.obj" 
-DEL /F "DSP2833x_Libraries\DSP2833x_ADC_cal.d" "DSP2833x_Libraries\DSP2833x_CodeStartBranch.d" "DSP2833x_Libraries\DSP2833x_usDelay.d" 
-’“≤ªµΩ D:\Code\DSP28335\example\DSP8233x_Example\example01_systemclock_config\Debug\DSP2833x_Libraries\DSP2833x_ADC_cal.d
-'Finished clean'
-' '
-
-**** Build Finished ****
-
 **** Build of configuration Debug for project example01_systemclock_config ****
 
 "C:\\ti\\ccsv6\\utils\\bin\\gmake" -k all 
-'Building file: ../DSP2833x_Libraries/DSP2833x_ADC_cal.asm'
-'Invoking: C2000 Compiler'
-"C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 --include_path="C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_headers/include" -g --display_error_number --diag_warning=225 --diag_wrap=off --preproc_with_compile --preproc_dependency="DSP2833x_Libraries/DSP2833x_ADC_cal.d" --obj_directory="DSP2833x_Libraries"  "../DSP2833x_Libraries/DSP2833x_ADC_cal.asm"
-'Finished building: ../DSP2833x_Libraries/DSP2833x_ADC_cal.asm'
-' '
-'Building file: ../DSP2833x_Libraries/DSP2833x_CodeStartBranch.asm'
-'Invoking: C2000 Compiler'
-"C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 --include_path="C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_headers/include" -g --display_error_number --diag_warning=225 --diag_wrap=off --preproc_with_compile --preproc_dependency="DSP2833x_Libraries/DSP2833x_CodeStartBranch.d" --obj_directory="DSP2833x_Libraries"  "../DSP2833x_Libraries/DSP2833x_CodeStartBranch.asm"
-'Finished building: ../DSP2833x_Libraries/DSP2833x_CodeStartBranch.asm'
-' '
 'Building file: ../DSP2833x_Libraries/DSP2833x_DefaultIsr.c'
 'Invoking: C2000 Compiler'
 "C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 --include_path="C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_headers/include" -g --display_error_number --diag_warning=225 --diag_wrap=off --preproc_with_compile --preproc_dependency="DSP2833x_Libraries/DSP2833x_DefaultIsr.d" --obj_directory="DSP2833x_Libraries"  "../DSP2833x_Libraries/DSP2833x_DefaultIsr.c"
 'Finished building: ../DSP2833x_Libraries/DSP2833x_DefaultIsr.c'
-' '
-'Building file: ../DSP2833x_Libraries/DSP2833x_GlobalVariableDefs.c'
-'Invoking: C2000 Compiler'
-"C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 --include_path="C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_headers/include" -g --display_error_number --diag_warning=225 --diag_wrap=off --preproc_with_compile --preproc_dependency="DSP2833x_Libraries/DSP2833x_GlobalVariableDefs.d" --obj_directory="DSP2833x_Libraries"  "../DSP2833x_Libraries/DSP2833x_GlobalVariableDefs.c"
-'Finished building: ../DSP2833x_Libraries/DSP2833x_GlobalVariableDefs.c'
 ' '
 'Building file: ../DSP2833x_Libraries/DSP2833x_Gpio.c'
 'Invoking: C2000 Compiler'
@@ -54,11 +26,6 @@ DEL /F "DSP2833x_Libraries\DSP2833x_ADC_cal.d" "DSP2833x_Libraries\DSP2833x_Code
 'Invoking: C2000 Compiler'
 "C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 --include_path="C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_headers/include" -g --display_error_number --diag_warning=225 --diag_wrap=off --preproc_with_compile --preproc_dependency="DSP2833x_Libraries/DSP2833x_SysCtrl.d" --obj_directory="DSP2833x_Libraries"  "../DSP2833x_Libraries/DSP2833x_SysCtrl.c"
 'Finished building: ../DSP2833x_Libraries/DSP2833x_SysCtrl.c'
-' '
-'Building file: ../DSP2833x_Libraries/DSP2833x_usDelay.asm'
-'Invoking: C2000 Compiler'
-"C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 --include_path="C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_headers/include" -g --display_error_number --diag_warning=225 --diag_wrap=off --preproc_with_compile --preproc_dependency="DSP2833x_Libraries/DSP2833x_usDelay.d" --obj_directory="DSP2833x_Libraries"  "../DSP2833x_Libraries/DSP2833x_usDelay.asm"
-'Finished building: ../DSP2833x_Libraries/DSP2833x_usDelay.asm'
 ' '
 'Building file: ../User/main.c'
 'Invoking: C2000 Compiler'

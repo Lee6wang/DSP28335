@@ -136,3 +136,18 @@ DSP2833x_Libraries
 滤波+采样来实现去除毛刺信号
 ![alt text](images/8.2.2.png)
 ![alt text](images/8.2.3.png)
+
+## 8.3 LED实验程序
+
+对于部分没有使用过条件编译的读者来说，这里特别说明一下，条件编译的代码格式如下
+
+```c
+#ifndef __YOURCODE_H_  //if判断语句，用来判断有没有定义，如果没有定义，直接跳转到endif
+#define __YOURCODE_H_   //如果未定义，则定义，防止重复定义，造成资源浪费
+
+···
+···
+#endif
+```
+
+飒飒
