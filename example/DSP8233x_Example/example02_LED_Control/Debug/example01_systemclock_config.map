@@ -1,7 +1,7 @@
 ******************************************************************************
              TMS320C2000 Linker PC v15.12.1                    
 ******************************************************************************
->> Linked Mon Dec 02 20:40:37 2024
+>> Linked Tue Dec 03 08:41:12 2024
 
 OUTPUT FILE NAME:   <example01_systemclock_config.out>
 ENTRY POINT SYMBOL: "_c_int00"  address: 0000941b
@@ -110,11 +110,12 @@ ramfuncs   0    0000801a    00000004
                   00009323    000000f8     DSP2833x_SysCtrl.obj (.text)
                   0000941b    00000056     rts2800_fpu32.lib : boot.obj (.text)
                   00009471    00000046                       : cpy_tbl.obj (.text)
-                  000094b7    00000037     main.obj (.text)
-                  000094ee    00000029     rts2800_fpu32.lib : exit.obj (.text)
-                  00009517    0000001a                       : cpy_utils.obj (.text)
-                  00009531    00000019                       : args_main.obj (.text)
-                  0000954a    00000009                       : _lock.obj (.text)
+                  000094b7    00000029                       : exit.obj (.text)
+                  000094e0    00000023     main.obj (.text)
+                  00009503    0000001a     rts2800_fpu32.lib : cpy_utils.obj (.text)
+                  0000951d    00000019                       : args_main.obj (.text)
+                  00009536    00000014     myled.obj (.text)
+                  0000954a    00000009     rts2800_fpu32.lib : _lock.obj (.text)
                   00009553    00000008     DSP2833x_CodeStartBranch.obj (.text)
                   0000955b    00000002     rts2800_fpu32.lib : pre_init.obj (.text)
                   0000955d    00000001                       : startup.obj (.text)
@@ -350,10 +351,15 @@ MODULE SUMMARY
     +--+---------------------------------+------+---------+---------+
        Total:                            1072   0         2678   
                                                                  
-    .\User\
-       main.obj                          55     0         0      
+    .\HardWare\MYLED\
+       myled.obj                         20     0         0      
     +--+---------------------------------+------+---------+---------+
-       Total:                            55     0         0      
+       Total:                            20     0         0      
+                                                                 
+    .\User\
+       main.obj                          35     0         0      
+    +--+---------------------------------+------+---------+---------+
+       Total:                            35     0         0      
                                                                  
     C:\ti\ccsv6\tools\compiler\ti-cgt-c2000_15.12.1.LTS\lib\rts2800_fpu32.lib
        boot.obj                          86     0         0      
@@ -478,7 +484,7 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 page  address   name                            
 ----  -------   ----                            
 0     00009000  .text                           
-0     000094ee  C$$EXIT                         
+0     000094b7  C$$EXIT                         
 0     000090e6  _ADCINT_ISR                     
 0     00380080  _ADC_cal                        
 1     00000b00  _AdcMirror                      
@@ -563,7 +569,7 @@ page  address   name
 0     0000938f  _InitPeripheralClocks           
 0     0000933e  _InitPll                        
 0     00009323  _InitSysCtrl                    
-0     000094cf  _LED_Init                       
+0     00009536  _LED_Init                       
 0     000092f8  _LUF_ISR                        
 0     000092ee  _LVF_ISR                        
 0     000091f4  _MRINTA_ISR                     
@@ -630,7 +636,7 @@ abs   ffffffff  ___c_args__
 0     0000955e  ___etext__                      
 abs   ffffffff  ___pinit__                      
 0     00009000  ___text__                       
-0     00009531  __args_main                     
+0     0000951d  __args_main                     
 1     0000c006  __lock                          
 0     00009552  __nop                           
 0     0000954e  __register_lock                 
@@ -639,16 +645,16 @@ abs   ffffffff  ___pinit__
 0     0000955d  __system_post_cinit             
 0     0000955b  __system_pre_init               
 1     0000c008  __unlock                        
-0     000094ee  _abort                          
+0     000094b7  _abort                          
 0     0000941b  _c_int00                        
 0     00009471  _copy_in                        
-0     00009517  _ddcopy                         
-0     000094b7  _delay                          
-0     00009517  _dpcopy                         
-0     000094f0  _exit                           
-0     000094e3  _main                           
-0     00009517  _pdcopy                         
-0     00009517  _ppcopy                         
+0     00009503  _ddcopy                         
+0     000094e0  _delay                          
+0     00009503  _dpcopy                         
+0     000094b9  _exit                           
+0     000094f8  _main                           
+0     00009503  _pdcopy                         
+0     00009503  _ppcopy                         
 0     00009319  _rsvd_ISR                       
 abs   ffffffff  binit                           
 0     00008000  cinit                           
@@ -755,17 +761,17 @@ page  address   name
 0     000093ea  _CsmUnlock                      
 0     0000941b  _c_int00                        
 0     00009471  _copy_in                        
-0     000094b7  _delay                          
-0     000094cf  _LED_Init                       
-0     000094e3  _main                           
-0     000094ee  C$$EXIT                         
-0     000094ee  _abort                          
-0     000094f0  _exit                           
-0     00009517  _ddcopy                         
-0     00009517  _dpcopy                         
-0     00009517  _pdcopy                         
-0     00009517  _ppcopy                         
-0     00009531  __args_main                     
+0     000094b7  C$$EXIT                         
+0     000094b7  _abort                          
+0     000094b9  _exit                           
+0     000094e0  _delay                          
+0     000094f8  _main                           
+0     00009503  _ddcopy                         
+0     00009503  _dpcopy                         
+0     00009503  _pdcopy                         
+0     00009503  _ppcopy                         
+0     0000951d  __args_main                     
+0     00009536  _LED_Init                       
 0     0000954a  __register_unlock               
 0     0000954e  __register_lock                 
 0     00009552  __nop                           

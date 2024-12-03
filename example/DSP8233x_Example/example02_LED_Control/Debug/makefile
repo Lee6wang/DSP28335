@@ -19,6 +19,7 @@ ORDERED_OBJS += \
 "./DSP2833x_Libraries/DSP2833x_PieVect.obj" \
 "./DSP2833x_Libraries/DSP2833x_SysCtrl.obj" \
 "./DSP2833x_Libraries/DSP2833x_usDelay.obj" \
+"./HardWare/MYLED/myled.obj" \
 "./User/main.obj" \
 "../DSP2833x_Libraries/28335_RAM_lnk.cmd" \
 "../DSP2833x_Libraries/DSP2833x_Headers_nonBIOS.cmd" \
@@ -34,8 +35,10 @@ RMDIR := RMDIR /S/Q
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include DSP2833x_Libraries/subdir_vars.mk
+-include HardWare/MYLED/subdir_vars.mk
 -include User/subdir_vars.mk
 -include DSP2833x_Libraries/subdir_rules.mk
+-include HardWare/MYLED/subdir_rules.mk
 -include User/subdir_rules.mk
 -include objects.mk
 
@@ -165,8 +168,8 @@ example01_systemclock_config.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "DSP2833x_Libraries\DSP2833x_DefaultIsr.d" "DSP2833x_Libraries\DSP2833x_GlobalVariableDefs.d" "DSP2833x_Libraries\DSP2833x_Gpio.d" "DSP2833x_Libraries\DSP2833x_PieCtrl.d" "DSP2833x_Libraries\DSP2833x_PieVect.d" "DSP2833x_Libraries\DSP2833x_SysCtrl.d" "User\main.d" 
-	-$(RM) "DSP2833x_Libraries\DSP2833x_ADC_cal.obj" "DSP2833x_Libraries\DSP2833x_CodeStartBranch.obj" "DSP2833x_Libraries\DSP2833x_DefaultIsr.obj" "DSP2833x_Libraries\DSP2833x_GlobalVariableDefs.obj" "DSP2833x_Libraries\DSP2833x_Gpio.obj" "DSP2833x_Libraries\DSP2833x_PieCtrl.obj" "DSP2833x_Libraries\DSP2833x_PieVect.obj" "DSP2833x_Libraries\DSP2833x_SysCtrl.obj" "DSP2833x_Libraries\DSP2833x_usDelay.obj" "User\main.obj" 
+	-$(RM) "DSP2833x_Libraries\DSP2833x_DefaultIsr.d" "DSP2833x_Libraries\DSP2833x_GlobalVariableDefs.d" "DSP2833x_Libraries\DSP2833x_Gpio.d" "DSP2833x_Libraries\DSP2833x_PieCtrl.d" "DSP2833x_Libraries\DSP2833x_PieVect.d" "DSP2833x_Libraries\DSP2833x_SysCtrl.d" "HardWare\MYLED\myled.d" "User\main.d" 
+	-$(RM) "DSP2833x_Libraries\DSP2833x_ADC_cal.obj" "DSP2833x_Libraries\DSP2833x_CodeStartBranch.obj" "DSP2833x_Libraries\DSP2833x_DefaultIsr.obj" "DSP2833x_Libraries\DSP2833x_GlobalVariableDefs.obj" "DSP2833x_Libraries\DSP2833x_Gpio.obj" "DSP2833x_Libraries\DSP2833x_PieCtrl.obj" "DSP2833x_Libraries\DSP2833x_PieVect.obj" "DSP2833x_Libraries\DSP2833x_SysCtrl.obj" "DSP2833x_Libraries\DSP2833x_usDelay.obj" "HardWare\MYLED\myled.obj" "User\main.obj" 
 	-$(RM) "DSP2833x_Libraries\DSP2833x_ADC_cal.d" "DSP2833x_Libraries\DSP2833x_CodeStartBranch.d" "DSP2833x_Libraries\DSP2833x_usDelay.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
