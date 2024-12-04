@@ -27,6 +27,8 @@ User/main.obj: D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/inclu
 User/main.obj: D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include/DSP2833x_I2C_defines.h
 User/main.obj: D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include/LED.h
 User/main.obj: D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include/DSP2833x_DefaultISR.h
+User/main.obj: D:/Code/DSP28335/example/DSP8233x_Example/example03_BEEP/HardWare/MYLED/myled.h
+User/main.obj: D:/Code/DSP28335/example/DSP8233x_Example/example03_BEEP/HardWare/BEEP/beep.h
 
 ../User/main.c: 
 D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_headers/include/DSP2833x_Device.h: 
@@ -55,3 +57,5 @@ D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include/DSP2833x_Dma
 D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include/DSP2833x_I2C_defines.h: 
 D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include/LED.h: 
 D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include/DSP2833x_DefaultISR.h: 
+D:/Code/DSP28335/example/DSP8233x_Example/example03_BEEP/HardWare/MYLED/myled.h: 
+D:/Code/DSP28335/example/DSP8233x_Example/example03_BEEP/HardWare/BEEP/beep.h: 

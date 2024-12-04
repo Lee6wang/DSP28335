@@ -1,9 +1,12 @@
 # DSP28335学习笔记
 
-author:Lee_07
+author:Lee
 11-02-2024
 version:1.0.0
 这里是一个初学者学习DSP28335的学习笔记，如有不妥之处请指出，谢谢！
+
+声明：本教程根据普中DSP28335教程总结而来，如有雷同，全是抄的（bushi
+此教程本意是为了在原有教程上做一定补充，非盈利性目的。
 
 ## 一、写在前面
 
@@ -129,6 +132,11 @@ DSP2833x_Libraries
 （4）下载引脚
 （5）BOOT引脚
 （6）GPIO 引脚
+同时，GPIO引脚分为A、B、C三组，范围分别是
+A组：GPIO0——GPIO31
+B组：GPIO32——GPIO63
+C组：GPIO64——GPIO87
+在这里主要影响的是PCLKCR1、2、3寄存器的选择
 
 ### 8.2 GPIO结构框图
 
@@ -141,7 +149,7 @@ DSP2833x_Libraries
 
 对于部分没有使用过条件编译的读者来说，这里特别说明一下，条件编译的代码格式如下
 
-```c
+```C
 #ifndef __YOURCODE_H_  //if判断语句，用来判断有没有定义，如果没有定义，直接跳转到endif
 #define __YOURCODE_H_   //如果未定义，则定义，防止重复定义，造成资源浪费
 
@@ -186,3 +194,226 @@ void LED_Init(void)
 ![alt text](images/9.1.1.png)
 
 ### 9.2 软件部分
+
+下面是一些相关的代码，仅供参考，由于普中官方的代码已经十分简略实用，在这里没有怎么修改
+
+```C
+//BEEP.H
+/*
+ * beep.h
+ *
+ *  Created on: 12/3/2024
+ *      Author: Lee
+ */
+
+#ifndef HARDWARE_BEEP_BEEP_H_
+#define HARDWARE_BEEP_BEEP_H_
+
+
+#include "DSP2833x_Device.h"     // DSP2833x Headerfile Include File
+#include "DSP2833x_Examples.h"   // DSP2833x Examples Include File
+
+#define BEEP_ON        (GpioDataRegs.GPASET.bit.GPIO6=1)
+#define BEEP_OFF       (GpioDataRegs.GPACLEAR.bit.GPIO6=1)
+#define BEEP_TOGGLE    (GpioDataRegs.GPATOGGLE.bit.GPIO6=1)
+
+void BEEP_Init(void);
+
+#endif /* HARDWARE_BEEP_BEEP_H_ */
+
+```
+
+```C
+//BEEP.C
+/*
+ * beep.c
+ *
+ *  Created on: 12/3/2024
+ *      Author: Lee
+ */
+
+#include "beep.h"
+
+void BEEP_Init(void)
+{
+    EALLOW;
+    SysCtrlRegs.PCLKCR3.bit.GPIOINENCLK = 1;//开启GPIO时钟
+    //端口配置
+    GpioCtrlRegs.GPAMUX1.bit.GPIO6=0;
+    GpioCtrlRegs.GPADIR.bit.GPIO6=1;
+    GpioCtrlRegs.GPAPUD.bit.GPIO6=0;
+
+    EDIS;
+
+    GpioDataRegs.GPACLEAR.bit.GPIO6=1;
+
+}
+
+```
+
+关于在开发中定义变量，个人建议在DSP2833x_Device.h头文件中找到这样一行,其中预先定义了各个数据格式，如果使用int或者其他数据类型，在开发过程中造成数据位数遗忘，这将会是一件非常危险的事。
+
+```C
+//---------------------------------------------------------------------------
+// For Portability, User Is Recommended To Use Following Data Type Size
+// Definitions For 16-bit and 32-Bit Signed/Unsigned Integers:
+//
+
+#ifndef DSP28_DATA_TYPES
+#define DSP28_DATA_TYPES
+typedef int             int16;
+typedef long            int32;
+typedef unsigned int    Uint16;
+typedef unsigned long   Uint32;
+typedef float           float32;
+typedef long double     float64;
+#endif
+```
+
+```C
+//main
+void main()
+{
+    Uint16 i = 0;
+    InitSysCtrl();//系统时钟初始化，默认已开启F28335所有外设时钟
+
+    LED_Init();
+    BEEP_Init();
+
+    while(1)
+    {
+        i++;
+        if(i == 5000)//每隔0.5s跳变一次
+        {
+            LED_TOGGLE;
+            i = 0;
+        }
+        BEEP_TOGGLE;
+        DELAY_US(100);//5KHz
+    }
+
+}
+```
+
+读者可能会发现，在这一行代码中，使用到了DELAY_US()这个函数，这个函数在配置文件中的DSP2833x_usDelay.asm文件下存放，在DSP2833x_Examples.h函数下定义
+
+```C
+#define DELAY_US(A)  DSP28x_usDelay(((((long double) A * 1000.0L) / (long double)CPU_RATE) - 9.0L) / 5.0L)
+```
+
+特别需要注意的是，我们阅读这个函数，会发现后面会传递一个long double类型的CPU_RATE类型的变量，这个变量与机器时钟息息相关，我们进入之后可以发现，里面是这么解释的：
+
+```c
+/*-----------------------------------------------------------------------------
+      Specify the clock rate of the CPU (SYSCLKOUT) in nS.
+
+      Take into account the input clock frequency and the PLL multiplier
+      selected in step 1.
+
+      Use one of the values provided, or define your own.
+      The trailing L is required tells the compiler to treat
+      the number as a 64-bit value.
+
+      Only one statement should be uncommented.
+
+      Example 1:150 MHz devices:
+                CLKIN is a 30MHz crystal.
+
+                In step 1 the user specified PLLCR = 0xA for a
+                150Mhz CPU clock (SYSCLKOUT = 150MHz).
+
+                In this case, the CPU_RATE will be 6.667L
+                Uncomment the line:  #define CPU_RATE  6.667L
+
+      Example 2:  100 MHz devices:
+                  CLKIN is a 20MHz crystal.
+
+                  In step 1 the user specified PLLCR = 0xA for a
+                  100Mhz CPU clock (SYSCLKOUT = 100MHz).
+
+                  In this case, the CPU_RATE will be 10.000L
+                  Uncomment the line:  #define CPU_RATE  10.000L
+-----------------------------------------------------------------------------*/
+#define CPU_RATE    6.667L   // for a 150MHz CPU clock speed (SYSCLKOUT)
+//#define CPU_RATE    7.143L   // for a 140MHz CPU clock speed (SYSCLKOUT)
+//#define CPU_RATE    8.333L   // for a 120MHz CPU clock speed (SYSCLKOUT)
+//#define CPU_RATE   10.000L   // for a 100MHz CPU clock speed (SYSCLKOUT)
+//#define CPU_RATE   13.330L   // for a 75MHz CPU clock speed (SYSCLKOUT)
+//#define CPU_RATE   20.000L   // for a 50MHz CPU clock speed  (SYSCLKOUT)
+//#define CPU_RATE   33.333L   // for a 30MHz CPU clock speed  (SYSCLKOUT)
+//#define CPU_RATE   41.667L   // for a 24MHz CPU clock speed  (SYSCLKOUT)
+//#define CPU_RATE   50.000L   // for a 20MHz CPU clock speed  (SYSCLKOUT)
+//#define CPU_RATE   66.667L   // for a 15MHz CPU clock speed  (SYSCLKOUT)
+//#define CPU_RATE  100.000L   // for a 10MHz CPU clock speed  (SYSCLKOUT)
+```
+
+上面的英文可以自行观看一下，在时钟定义那一节里面，我们会修改系统时钟，如果系统时钟修改之后，为了让DELAY_US函数延迟依然准确，我们也需要在这里选择对应的机器周期所对应的CPU_RATE。
+所以没事，别闲的改机器周期。
+
+## 十、继电器
+
+### 10.1 硬件部分
+
+在普中的开发板设计当中，由于板载驱动能力有限，所以在这里依然选择ULN2003D来完成驱动，其驱动引脚为GPIO15。
+在电路设计中，电磁线圈后加的二极管是为了防止在电磁线圈失电后产生的电动势过大，损坏芯片。
+这里的电路比较简单，就不附图了，可以自行查看原理图。
+
+### 10.2 软件部分
+
+笔者在这里因为太懒了，不想敲了，直接CV的代码
+
+```c
+/*
+ * relay.h
+ *
+ *  Created on: 2018-1-22
+ *      Author: Administrator
+ */
+
+#ifndef RELAY_H_
+#define RELAY_H_
+
+
+
+#include "DSP2833x_Device.h"     // DSP2833x 头文件
+#include "DSP2833x_Examples.h"   // DSP2833x 例子相关头文件
+
+
+#define RELAY_ON    (GpioDataRegs.GPASET.bit.GPIO15=1)
+#define RELAY_OFF   (GpioDataRegs.GPACLEAR.bit.GPIO15=1)
+
+
+void Relay_Init(void);
+
+
+#endif /* RELAY_H_ */
+
+```
+
+```c
+/*
+ * relay.c
+ *
+ *  Created on: 2018-1-22
+ *      Author: Administrator
+ */
+
+#include "relay.h"
+
+
+void Relay_Init(void)
+{
+    EALLOW;
+    SysCtrlRegs.PCLKCR3.bit.GPIOINENCLK = 1;// 开启GPIO时钟
+
+    //继电器端口配置
+    GpioCtrlRegs.GPAMUX1.bit.GPIO15=0;
+    GpioCtrlRegs.GPADIR.bit.GPIO15=1;
+    GpioCtrlRegs.GPAPUD.bit.GPIO15=0;
+
+    EDIS;
+
+    GpioDataRegs.GPACLEAR.bit.GPIO15=1;
+}
+
+```

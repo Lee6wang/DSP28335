@@ -41,6 +41,7 @@
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_15.12.compilerID.DIAG_WRAP.1456980556" name="Wrap diagnostic messages (--diag_wrap)" superClass="com.ti.ccstudio.buildDefinitions.C2000_15.12.compilerID.DIAG_WRAP" value="com.ti.ccstudio.buildDefinitions.C2000_15.12.compilerID.DIAG_WRAP.off" valueType="enumerated"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_15.12.compilerID.INCLUDE_PATH.792799007" name="Add dir to #include search path (--include_path, -I)" superClass="com.ti.ccstudio.buildDefinitions.C2000_15.12.compilerID.INCLUDE_PATH" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${CG_TOOL_ROOT}/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;D:\Code\DSP28335\example\DSP8233x_Example\example03_BEEP\HardWare\MYLED&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;D:\Code\DSP28335\example\DSP8233x_Example\example03_BEEP\HardWare\BEEP&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;D:\Code\DSP28335\example\DSP2833x_Libraries\DSP2833x_common\include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;D:\Code\DSP28335\example\DSP2833x_Libraries\DSP2833x_headers\include&quot;"/>

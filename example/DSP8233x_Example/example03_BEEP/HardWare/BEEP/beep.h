@@ -16,5 +16,6 @@
 #define BEEP_OFF		(GpioDataRegs.GPACLEAR.bit.GPIO6=1)
 #define BEEP_TOGGLE		(GpioDataRegs.GPATOGGLE.bit.GPIO6=1)
 
+void BEEP_Init(void);
 
 #endif /* HARDWARE_BEEP_BEEP_H_ */

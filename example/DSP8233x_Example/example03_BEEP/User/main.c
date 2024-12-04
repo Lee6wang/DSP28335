@@ -7,6 +7,8 @@
 
 #include "DSP2833x_Device.h"     // DSP2833x Headerfile Include File
 #include "DSP2833x_Examples.h"   // DSP2833x Examples Include File
+#include "myled.h"
+#include "beep.h"
 
 /*******************************************************************************
 * 函 数 名         : delay
@@ -22,27 +24,6 @@ void delay(void)
 		for (j = 0; j < 100000; j++);
 }
 
-/*******************************************************************************
-* 函 数 名         : LED_Init
-* 函数功能		   : LED初始化函数
-* 输    入         : 无
-* 输    出         : 无
-*******************************************************************************/
-void LED_Init(void)
-{
-	EALLOW;//关闭写保护
-
-	SysCtrlRegs.PCLKCR3.bit.GPIOINENCLK = 1;    // 开启GPIO时钟
-
-	//LED1端口配置
-	GpioCtrlRegs.GPCMUX1.bit.GPIO68=0;//设置为通用GPIO功能
-	GpioCtrlRegs.GPCDIR.bit.GPIO68=1;//设置GPIO方向为输出
-	GpioCtrlRegs.GPCPUD.bit.GPIO68=0;//使能GPIO上拉电阻
-
-	GpioDataRegs.GPCSET.bit.GPIO68=1;//设置GPIO输出高电平
-
-	EDIS;//开启写保护
-}
 
 /*******************************************************************************
 * 函 数 名         : main
@@ -52,14 +33,22 @@ void LED_Init(void)
 *******************************************************************************/
 void main()
 {
+	Uint16 i = 0;
 	InitSysCtrl();//系统时钟初始化，默认已开启F28335所有外设时钟
 
 	LED_Init();
+	BEEP_Init();
 
 	while(1)
 	{
-		GpioDataRegs.GPCTOGGLE.bit.GPIO68=1;//设置GPIO输出翻转信号
-		delay();
+		i++;
+		if(i == 5000)//每隔0.5s跳变一次
+		{
+			LED_TOGGLE;
+			i = 0;
+		}
+		BEEP_TOGGLE;
+		DELAY_US(100);//5KHz
 	}
 
 }
