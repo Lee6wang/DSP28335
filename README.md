@@ -417,3 +417,416 @@ void Relay_Init(void)
 }
 
 ```
+
+## 十一、按键控制实验
+
+### 10.1 按键硬件部分
+
+![alt text](images/11.1.1.png)
+在按键电路中，两个较短的之间不导通，长的导通，按下状态转换。
+由于按键按下的时候，会有抖动，可设置小延迟进行处理，通常延迟5~10ms（软件消抖）
+串联RC电路（硬件消抖）
+
+### 10.2 矩阵键盘扫描方法
+
+行列扫描法
+顾名思义，一行一行看,逐渐遍历，会存在优先级的问题，同时按下只识别到键位更小的。
+参考32or51的矩阵键盘
+
+### 10.3 按键软件部分
+
+在写代码之前，我们需要先了解一下板子上各个引脚连线情况，具体如下：
+![alt text](images/11.3.1.png)
+![alt text](images/11.3.2.png)
+![alt text](images/11.3.3.png)
+
+```c
+/*
+ * key.c
+ *
+ *  Created on: 12/13/2024
+ *      Author: Lee
+ */
+
+#include "key.h"
+
+
+
+void KEY_Init(void)
+{
+    EALLOW;//打开写保护
+    SysCtrlRegs.PCLKCR3.bit.GPIOINENCLK = 1;// 开启GPIO时钟
+
+    //KEY端口配置
+    GpioCtrlRegs.GPAMUX1.bit.GPIO12=0;
+    GpioCtrlRegs.GPADIR.bit.GPIO12=0;//改变方向为输入
+    GpioCtrlRegs.GPAPUD.bit.GPIO12=0;//设置为不上拉
+
+    GpioCtrlRegs.GPAMUX1.bit.GPIO13=0;
+    GpioCtrlRegs.GPADIR.bit.GPIO13=0;
+    GpioCtrlRegs.GPAPUD.bit.GPIO13=0;
+
+    GpioCtrlRegs.GPAMUX1.bit.GPIO14=0;
+    GpioCtrlRegs.GPADIR.bit.GPIO14=0;
+    GpioCtrlRegs.GPAPUD.bit.GPIO14=0;
+
+    GpioCtrlRegs.GPBMUX2.bit.GPIO48=0;
+    GpioCtrlRegs.GPBDIR.bit.GPIO48=1;//这里后面三个设置为输出，便于扫描
+    GpioCtrlRegs.GPBPUD.bit.GPIO48=0;
+
+    GpioCtrlRegs.GPBMUX2.bit.GPIO49=0;
+    GpioCtrlRegs.GPBDIR.bit.GPIO49=1;
+    GpioCtrlRegs.GPBPUD.bit.GPIO49=0;
+
+    GpioCtrlRegs.GPBMUX2.bit.GPIO50=0;
+    GpioCtrlRegs.GPBDIR.bit.GPIO50=1;
+    GpioCtrlRegs.GPBPUD.bit.GPIO50=0;
+
+    EDIS;//关闭写保护
+
+    GpioDataRegs.GPBSET.bit.GPIO48=1;
+    GpioDataRegs.GPBSET.bit.GPIO49=1;
+    GpioDataRegs.GPBSET.bit.GPIO50=1;
+
+}
+
+char KEY_Scan(char mode)
+{
+
+    static char keyl1=1;
+    static char keyl2=1;
+    static char keyl3=1;
+
+    //第1列扫描
+    KEY_L1_SetL;
+    KEY_L2_SetH;
+    KEY_L3_SetH;
+    if(keyl1==1&&(KEY_H1==0||KEY_H2==0||KEY_H3==0))
+    {
+        DELAY_US(10000);//软件消抖
+        keyl1=0;//防止重复进入
+        if(KEY_H1==0)
+        {
+            return KEY1_PRESS;
+        }
+        else if(KEY_H2==0)
+        {
+            return KEY4_PRESS;
+        }
+        else if(KEY_H3==0)
+        {
+            return KEY7_PRESS;
+        }
+    }
+    else if(KEY_H1==1&&KEY_H2==1&&KEY_H3==1)
+    {
+        keyl1=1;//复位，下一次进入
+    }
+    if(mode)
+        keyl1=1;//设置按键模式，是否可以连续按
+
+
+    //第2列扫描
+    KEY_L2_SetL;
+    KEY_L1_SetH;
+    KEY_L3_SetH;
+    if(keyl2==1&&(KEY_H1==0||KEY_H2==0||KEY_H3==0))
+    {
+        DELAY_US(10000);
+        keyl2=0;
+        if(KEY_H1==0)
+        {
+            return KEY2_PRESS;
+        }
+        else if(KEY_H2==0)
+        {
+            return KEY5_PRESS;
+        }
+        else if(KEY_H3==0)
+        {
+            return KEY8_PRESS;
+        }
+    }
+    else if(KEY_H1==1&&KEY_H2==1&&KEY_H3==1)
+    {
+        keyl2=1;
+    }
+    if(mode)
+        keyl2=1;
+
+
+    //第3列扫描
+    KEY_L3_SetL;
+    KEY_L1_SetH;
+    KEY_L2_SetH;
+    if(keyl3==1&&(KEY_H1==0||KEY_H2==0||KEY_H3==0))
+    {
+        DELAY_US(10000);
+        keyl3=0;
+        if(KEY_H1==0)
+        {
+            return KEY3_PRESS;
+        }
+        else if(KEY_H2==0)
+        {
+            return KEY6_PRESS;
+        }
+        else if(KEY_H3==0)
+        {
+            return KEY9_PRESS;
+        }
+    }
+    else if(KEY_H1==1&&KEY_H2==1&&KEY_H3==1)
+    {
+        keyl3=1;
+    }
+    if(mode)
+        keyl3=1;
+
+    return KEY_UNPRESS;
+}
+```
+
+下面是头文件定义，头文件定义真的可以帮助我们简化许多工作
+
+```c
+/*
+ * key.h
+ *
+ *  Created on: 12/13/2024
+ *      Author: Lee
+ */
+#ifndef KEY_H_
+#define KEY_H_
+
+#include "DSP2833x_Device.h"     // DSP2833x 头文件
+#include "DSP2833x_Examples.h"   // DSP2833x 例子相关头文件
+//设置电平定义
+#define KEY_L1_SetL         (GpioDataRegs.GPBCLEAR.bit.GPIO48=1)
+#define KEY_L2_SetL         (GpioDataRegs.GPBCLEAR.bit.GPIO49=1)
+#define KEY_L3_SetL         (GpioDataRegs.GPBCLEAR.bit.GPIO50=1)
+
+#define KEY_L1_SetH         (GpioDataRegs.GPBSET.bit.GPIO48=1)
+#define KEY_L2_SetH         (GpioDataRegs.GPBSET.bit.GPIO49=1)
+#define KEY_L3_SetH         (GpioDataRegs.GPBSET.bit.GPIO50=1)
+//读取定义
+#define KEY_H1          (GpioDataRegs.GPADAT.bit.GPIO12)
+#define KEY_H2          (GpioDataRegs.GPADAT.bit.GPIO13)
+#define KEY_H3          (GpioDataRegs.GPADAT.bit.GPIO14)
+
+#define KEY1_PRESS      1
+#define KEY2_PRESS      2
+#define KEY3_PRESS      3
+#define KEY4_PRESS      4
+#define KEY5_PRESS      5
+#define KEY6_PRESS      6
+#define KEY7_PRESS      7
+#define KEY8_PRESS      8
+#define KEY9_PRESS      9
+#define KEY_UNPRESS     0
+
+void KEY_Init(void);
+char KEY_Scan(char mode);
+
+#endif /* KEY_H_ */
+```
+
+下面是main函数
+
+```c
+/*
+ * main.c
+ *
+ *  Created on: 12/13/2024
+ *      Author: Administrator
+ */
+
+
+#include "DSP2833x_Device.h"     // DSP2833x Headerfile Include File
+#include "DSP2833x_Examples.h"   // DSP2833x Examples Include File
+
+#include "leds.h"
+#include "key.h"
+
+
+/*******************************************************************************
+* 函 数 名         : main
+* 函数功能         : 主函数
+* 输    入         : 无
+* 输    出         : 无
+*******************************************************************************/
+void main()
+{
+    int i=0;
+    char key=0;
+
+    InitSysCtrl();
+
+    LED_Init();
+    KEY_Init();
+
+    while(1)
+    {
+        key=KEY_Scan(0);
+        switch(key)//这里作者只写到七个，剩余的操作，可由读者自行添加功能
+        {
+            case KEY1_PRESS: LED2_TOGGLE;break;
+            case KEY2_PRESS: LED3_TOGGLE;break;
+            case KEY3_PRESS: LED4_TOGGLE;break;
+            case KEY4_PRESS: LED5_TOGGLE;break;
+            case KEY5_PRESS: LED6_TOGGLE;break;
+            case KEY6_PRESS: LED7_TOGGLE;break;
+        }
+
+        i++;
+        if(i%2000==0)
+        {
+            LED1_TOGGLE;//工作指示灯，判断系统是否在运行中
+        }
+        DELAY_US(100);
+    }
+}
+```
+
+## 十二、直流电机实验
+
+### 12.1 电机硬件部分
+
+采用TCS1508S电路来完成，芯片各个引脚功能对照如下
+![alt text](images/12.1.1.png)
+真值表如下所示
+![alt text](images/12.1.2.png)
+INA和INB对应OUTA和OUTB，两两相对，类比L298N，非常经典
+其对应的开发板原理图如下所示
+![alt text](images/12.1.3.png)
+![alt text](images/12.1.4.png)
+
+### 12.2 电机软件部分
+
+其实这一部分无需多言，这里是不带有PWM的，直接给高低电平即可。
+下面贴一下代码吧
+
+```c
+/*
+ * dc_motor.c
+ *
+ *  Created on: 2018-1-23
+ *      Author: Administrator
+ */
+
+
+#include "dc_motor.h"
+
+
+void DC_Motor_Init(void)
+{
+    EALLOW;
+    SysCtrlRegs.PCLKCR3.bit.GPIOINENCLK = 1;// 开启GPIO时钟
+    //DC_MOTOR 第1路端口配置
+    GpioCtrlRegs.GPAMUX1.bit.GPIO2=0;
+    GpioCtrlRegs.GPADIR.bit.GPIO2=1;
+
+    GpioCtrlRegs.GPAMUX1.bit.GPIO3=0;
+    GpioCtrlRegs.GPADIR.bit.GPIO3=1;
+
+    //DC_MOTOR 第2路端口配置
+    GpioCtrlRegs.GPAMUX1.bit.GPIO4=0;
+    GpioCtrlRegs.GPADIR.bit.GPIO4=1;
+
+    GpioCtrlRegs.GPAMUX1.bit.GPIO5=0;
+    GpioCtrlRegs.GPADIR.bit.GPIO5=1;
+
+    EDIS;
+
+    GpioDataRegs.GPACLEAR.bit.GPIO2=1;
+    GpioDataRegs.GPACLEAR.bit.GPIO3=1;
+    GpioDataRegs.GPACLEAR.bit.GPIO4=1;
+    GpioDataRegs.GPACLEAR.bit.GPIO5=1;
+}
+```
+
+```c
+/*
+ * dc_motor.h
+ *
+ *  Created on: 2018-1-23
+ *      Author: Administrator
+ */
+
+#ifndef DC_MOTOR_H_
+#define DC_MOTOR_H_
+
+
+#include "DSP2833x_Device.h"     // DSP2833x 头文件
+#include "DSP2833x_Examples.h"   // DSP2833x 例子相关头文件
+
+
+#define DC_MOTOR_INA_SETH            (GpioDataRegs.GPASET.bit.GPIO2=1)
+#define DC_MOTOR_INA_SETL            (GpioDataRegs.GPACLEAR.bit.GPIO2=1)
+#define DC_MOTOR_INB_SETH            (GpioDataRegs.GPASET.bit.GPIO3=1)
+#define DC_MOTOR_INB_SETL            (GpioDataRegs.GPACLEAR.bit.GPIO3=1)
+
+#define DC_MOTOR_INC_SETH            (GpioDataRegs.GPASET.bit.GPIO4=1)
+#define DC_MOTOR_INC_SETL            (GpioDataRegs.GPACLEAR.bit.GPIO4=1)
+#define DC_MOTOR_IND_SETH            (GpioDataRegs.GPASET.bit.GPIO5=1)
+#define DC_MOTOR_IND_SETL            (GpioDataRegs.GPACLEAR.bit.GPIO5=1)
+
+void DC_Motor_Init(void);
+
+#endif /* DC_MOTOR_H_ */
+```
+
+```c
+/*
+ * main.c
+ *
+ *  Created on: 2018-3-21
+ *      Author: Administrator
+ */
+
+
+#include "DSP2833x_Device.h"     // DSP2833x Headerfile Include File
+#include "DSP2833x_Examples.h"   // DSP2833x Examples Include File
+
+#include "leds.h"
+#include "key.h"
+#include "dc_motor.h"
+
+
+
+/*******************************************************************************
+* 函 数 名         : main
+* 函数功能         : 主函数
+* 输    入         : 无
+* 输    出         : 无
+*******************************************************************************/
+void main()
+{
+    int i=0;
+    char key=0;
+
+    InitSysCtrl();
+
+    LED_Init();
+    KEY_Init();
+    DC_Motor_Init();
+
+    while(1)
+    {
+        key=KEY_Scan(0);
+        switch(key)
+        {
+            case KEY1_PRESS: DC_MOTOR_INA_SETH;DC_MOTOR_INB_SETL;break;
+            case KEY2_PRESS: DC_MOTOR_INA_SETL;DC_MOTOR_INB_SETH;break;
+            case KEY3_PRESS: DC_MOTOR_INA_SETL;DC_MOTOR_INB_SETL;break;
+        }
+
+        i++;
+        if(i%2000==0)
+        {
+            LED1_TOGGLE;
+        }
+        DELAY_US(100);
+    }
+}
+```

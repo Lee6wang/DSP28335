@@ -1,0 +1,72 @@
+
+**** Build of configuration Debug for project example05_key ****
+
+"C:\\ti\\ccsv6\\utils\\bin\\gmake" -k all 
+'Building file: ../DSP2833x_Libraries/DSP2833x_ADC_cal.asm'
+'Invoking: C2000 Compiler'
+"C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 --include_path="C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/include" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/key" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/leds" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_headers/include" -g --display_error_number --diag_warning=225 --diag_wrap=off --preproc_with_compile --preproc_dependency="DSP2833x_Libraries/DSP2833x_ADC_cal.d" --obj_directory="DSP2833x_Libraries"  "../DSP2833x_Libraries/DSP2833x_ADC_cal.asm"
+'Finished building: ../DSP2833x_Libraries/DSP2833x_ADC_cal.asm'
+' '
+'Building file: ../DSP2833x_Libraries/DSP2833x_CodeStartBranch.asm'
+'Invoking: C2000 Compiler'
+"C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 --include_path="C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/include" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/key" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/leds" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_headers/include" -g --display_error_number --diag_warning=225 --diag_wrap=off --preproc_with_compile --preproc_dependency="DSP2833x_Libraries/DSP2833x_CodeStartBranch.d" --obj_directory="DSP2833x_Libraries"  "../DSP2833x_Libraries/DSP2833x_CodeStartBranch.asm"
+'Finished building: ../DSP2833x_Libraries/DSP2833x_CodeStartBranch.asm'
+' '
+'Building file: ../DSP2833x_Libraries/DSP2833x_DefaultIsr.c'
+'Invoking: C2000 Compiler'
+"C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 --include_path="C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/include" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/key" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/leds" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_headers/include" -g --display_error_number --diag_warning=225 --diag_wrap=off --preproc_with_compile --preproc_dependency="DSP2833x_Libraries/DSP2833x_DefaultIsr.d" --obj_directory="DSP2833x_Libraries"  "../DSP2833x_Libraries/DSP2833x_DefaultIsr.c"
+'Finished building: ../DSP2833x_Libraries/DSP2833x_DefaultIsr.c'
+' '
+'Building file: ../DSP2833x_Libraries/DSP2833x_GlobalVariableDefs.c'
+'Invoking: C2000 Compiler'
+"C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 --include_path="C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/include" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/key" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/leds" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_headers/include" -g --display_error_number --diag_warning=225 --diag_wrap=off --preproc_with_compile --preproc_dependency="DSP2833x_Libraries/DSP2833x_GlobalVariableDefs.d" --obj_directory="DSP2833x_Libraries"  "../DSP2833x_Libraries/DSP2833x_GlobalVariableDefs.c"
+'Finished building: ../DSP2833x_Libraries/DSP2833x_GlobalVariableDefs.c'
+' '
+'Building file: ../DSP2833x_Libraries/DSP2833x_Gpio.c'
+'Invoking: C2000 Compiler'
+"C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 --include_path="C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/include" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/key" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/leds" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_headers/include" -g --display_error_number --diag_warning=225 --diag_wrap=off --preproc_with_compile --preproc_dependency="DSP2833x_Libraries/DSP2833x_Gpio.d" --obj_directory="DSP2833x_Libraries"  "../DSP2833x_Libraries/DSP2833x_Gpio.c"
+'Finished building: ../DSP2833x_Libraries/DSP2833x_Gpio.c'
+' '
+'Building file: ../DSP2833x_Libraries/DSP2833x_PieCtrl.c'
+'Invoking: C2000 Compiler'
+"C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 --include_path="C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/include" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/key" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/leds" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_headers/include" -g --display_error_number --diag_warning=225 --diag_wrap=off --preproc_with_compile --preproc_dependency="DSP2833x_Libraries/DSP2833x_PieCtrl.d" --obj_directory="DSP2833x_Libraries"  "../DSP2833x_Libraries/DSP2833x_PieCtrl.c"
+'Finished building: ../DSP2833x_Libraries/DSP2833x_PieCtrl.c'
+' '
+'Building file: ../DSP2833x_Libraries/DSP2833x_PieVect.c'
+'Invoking: C2000 Compiler'
+"C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 --include_path="C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/include" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/key" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/leds" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_headers/include" -g --display_error_number --diag_warning=225 --diag_wrap=off --preproc_with_compile --preproc_dependency="DSP2833x_Libraries/DSP2833x_PieVect.d" --obj_directory="DSP2833x_Libraries"  "../DSP2833x_Libraries/DSP2833x_PieVect.c"
+'Finished building: ../DSP2833x_Libraries/DSP2833x_PieVect.c'
+' '
+'Building file: ../DSP2833x_Libraries/DSP2833x_SysCtrl.c'
+'Invoking: C2000 Compiler'
+"C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 --include_path="C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/include" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/key" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/leds" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_headers/include" -g --display_error_number --diag_warning=225 --diag_wrap=off --preproc_with_compile --preproc_dependency="DSP2833x_Libraries/DSP2833x_SysCtrl.d" --obj_directory="DSP2833x_Libraries"  "../DSP2833x_Libraries/DSP2833x_SysCtrl.c"
+'Finished building: ../DSP2833x_Libraries/DSP2833x_SysCtrl.c'
+' '
+'Building file: ../DSP2833x_Libraries/DSP2833x_usDelay.asm'
+'Invoking: C2000 Compiler'
+"C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 --include_path="C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/include" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/key" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/leds" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_headers/include" -g --display_error_number --diag_warning=225 --diag_wrap=off --preproc_with_compile --preproc_dependency="DSP2833x_Libraries/DSP2833x_usDelay.d" --obj_directory="DSP2833x_Libraries"  "../DSP2833x_Libraries/DSP2833x_usDelay.asm"
+'Finished building: ../DSP2833x_Libraries/DSP2833x_usDelay.asm'
+' '
+'Building file: ../HardWare/key/key.c'
+'Invoking: C2000 Compiler'
+"C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 --include_path="C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/include" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/key" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/leds" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_headers/include" -g --display_error_number --diag_warning=225 --diag_wrap=off --preproc_with_compile --preproc_dependency="HardWare/key/key.d" --obj_directory="HardWare/key"  "../HardWare/key/key.c"
+'Finished building: ../HardWare/key/key.c'
+' '
+'Building file: ../HardWare/leds/leds.c'
+'Invoking: C2000 Compiler'
+"C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 --include_path="C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/include" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/key" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/leds" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_headers/include" -g --display_error_number --diag_warning=225 --diag_wrap=off --preproc_with_compile --preproc_dependency="HardWare/leds/leds.d" --obj_directory="HardWare/leds"  "../HardWare/leds/leds.c"
+'Finished building: ../HardWare/leds/leds.c'
+' '
+'Building file: ../User/main.c'
+'Invoking: C2000 Compiler'
+"C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 --include_path="C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/include" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/key" --include_path="D:/Code/DSP28335/example/DSP8233x_Example/example05_key/HardWare/leds" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_common/include" --include_path="D:/Code/DSP28335/example/DSP2833x_Libraries/DSP2833x_headers/include" -g --display_error_number --diag_warning=225 --diag_wrap=off --preproc_with_compile --preproc_dependency="User/main.d" --obj_directory="User"  "../User/main.c"
+'Finished building: ../User/main.c'
+' '
+'Building target: example05_key.out'
+'Invoking: C2000 Linker'
+"C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 -g --display_error_number --diag_warning=225 --diag_wrap=off -z -m"example05_key.map" --stack_size=0x300 --warn_sections -i"C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/lib" -i"C:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/include" --reread_libs --diag_wrap=off --display_error_number --xml_link_info="example05_key_linkInfo.xml" --rom_model -o "example05_key.out" "./DSP2833x_Libraries/DSP2833x_ADC_cal.obj" "./DSP2833x_Libraries/DSP2833x_CodeStartBranch.obj" "./DSP2833x_Libraries/DSP2833x_DefaultIsr.obj" "./DSP2833x_Libraries/DSP2833x_GlobalVariableDefs.obj" "./DSP2833x_Libraries/DSP2833x_Gpio.obj" "./DSP2833x_Libraries/DSP2833x_PieCtrl.obj" "./DSP2833x_Libraries/DSP2833x_PieVect.obj" "./DSP2833x_Libraries/DSP2833x_SysCtrl.obj" "./DSP2833x_Libraries/DSP2833x_usDelay.obj" "./HardWare/key/key.obj" "./HardWare/leds/leds.obj" "./User/main.obj" "../DSP2833x_Libraries/28335_RAM_lnk.cmd" "../DSP2833x_Libraries/DSP2833x_Headers_nonBIOS.cmd" "../DSP2833x_Libraries/IQmath.lib"  -llibc.a 
+<Linking>
+'Finished building target: example05_key.out'
+' '
+
+**** Build Finished ****
